@@ -1,19 +1,35 @@
-import tkinter as tk
-from tkinter import Label, Entry, Button
+from tkinter.ttk import *
+from tkinter import *
+import mysql.connector
+from tkinter import messagebox
 from PIL import Image, ImageTk
-
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="xhealth"
+)
+mycursor = mydb.cursor()
 # Function to handle login action
-def login_action():
+def signup_action():
     username = username_entry.get()
     password = password_entry.get()
-    
-    if username == "dhairyash.aswani" or password == "pass@123":
-        print("Please enter both username and password!")
+
+    Insert = "Insert into login(username,password) values(%s,%s)"
+    if(username!="" and password!=""):
+            Value = (username,password)
+            print(Value)
+            mycursor.execute(Insert, Value)
+            mydb.commit()
+            messagebox.askokcancel("Information", "Record inserted")            
     else:
-        print(f"Username: {username}, Password: {password}")
+        if (username == "" and password == ""):
+            messagebox.askokcancel("Information", "Please Fill All Details")
+        else:
+            messagebox.askokcancel("Information", "Some fields left blank")
 
 # Initialize the main window
-root = tk.Tk()
+root = Tk()
 root.title("X-Health Login")
 root.geometry("500x400")
 
@@ -43,8 +59,11 @@ password_entry = Entry(root, font=("Arial", 12), width=30, show="*")
 password_entry.pack(pady=5)
 
 # Create a Login button with more styling
-login_button = Button(root, text="Login", font=("Arial", 12), bg="blue", fg="white", width=10, height=2, command=login_action)
+login_button = Button(root, text="LOGIN", font=("Arial", 12), bg="blue", fg="white", width=10, height=2, command=signup_action)
 login_button.pack(pady=20)
+
+signup_button = Button(root, text="SIGNUP", font=("Arial", 12), bg="blue", fg="white", width=10, height=2, command=signup_action)
+signup_button.pack(pady=20)
 
 # Run the application
 root.mainloop()
