@@ -102,12 +102,24 @@ def login_action():
 root = Tk()
 root.title("X-Health Login")
 root.geometry("900x550")
+root.configure(bg="#23395B")  # Set a default background color for the window
+
+# Configure the grid to allow expansion
+root.grid_rowconfigure(0, weight=1)
+root.grid_columnconfigure(0, weight=1)
+root.grid_columnconfigure(1, weight=1)
 
 # Apply gradient background (using tkinter.Frame instead of ttk.Frame)
-gradient_frame_left = Frame(root, bg="#95C8F0", width=450, height=550)  # Use tkinter.Frame
-gradient_frame_left.grid(row=0, column=0)
-gradient_frame_right = Frame(root, bg="#23395B", width=450, height=550)  # Use tkinter.Frame
-gradient_frame_right.grid(row=0, column=1)
+gradient_frame_left = Frame(root, bg="#95C8F0")  # Use tkinter.Frame
+gradient_frame_left.grid(row=0, column=0, sticky="nsew")  # Expand in all directions
+
+gradient_frame_right = Frame(root, bg="#23395B")  # Use tkinter.Frame
+gradient_frame_right.grid(row=0, column=1, sticky="nsew")  # Expand in all directions
+
+# Make frames expandable with the window
+root.grid_columnconfigure(0, weight=1)
+root.grid_columnconfigure(1, weight=1)
+root.grid_rowconfigure(0, weight=1)
 
 # Load and display the logo on the left frame
 image_path = r"D:\Dhairyash\\College\2nd year\sem4\PRP\X-Health(Python Project)\landing page display image.jpg"
@@ -139,14 +151,13 @@ password_entry = Entry(gradient_frame_right, font=("Arial", 12), width=30, show=
 password_entry.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 # Login Button
-login_button = Button(gradient_frame_right, text="Login", font=("Arial", 12), bg="#3B5998", fg="white", width=10, height=2, command=login_action)
+login_button = Button(gradient_frame_right, text="Login", font=("Arial", 12), bg="blue", fg="white", width=10, height=2, command=login_action)
 login_button.place(relx=0.5, rely=0.6, anchor=CENTER)
-
 
 # Signup Link
 signup_label = Label(gradient_frame_right, text="Create an account", font=("Arial", 10), bg="#23395B", fg="white", cursor="hand2")
 signup_label.place(relx=0.4, rely=0.75, anchor=CENTER)
-signup_button = Button(gradient_frame_right, text="Signup", font=("Arial", 10), bg="#3B5998", fg="white", width=8, command=signup_action)
+signup_button = Button(gradient_frame_right, text="Signup", font=("Arial", 10), bg="blue", fg="white", width=8, command=signup_action)
 signup_button.place(relx=0.6, rely=0.75, anchor=CENTER)
 
 # Forget Password
