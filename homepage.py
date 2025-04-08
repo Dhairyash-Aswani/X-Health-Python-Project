@@ -20,14 +20,14 @@ nav_bar = Frame(root, bg="#0A1F44", height=80)  # Primary color: Deep Navy Blue
 nav_bar.place(x=0, y=0, width=1024, height=80)
 
 # Logo
-logo_path = r"D:\Dhairyash\College\2nd year\sem4\PRP\X-Health(Python Project)\X-Health Logo.jpg"
+logo_path = r"C:\Users\Yasharth\OneDrive\Desktop\Yasharth\Python\Mini project (Xhealth)\X-Health Logo.jpg"
 logo_img = Image.open(logo_path).resize((120, 60), Image.LANCZOS)
 logo_photo = ImageTk.PhotoImage(logo_img)
 logo_label = Label(nav_bar, image=logo_photo, bg="#0A1F44")
 logo_label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 # Profile Icon and Menu
-profile_icon_path = r"D:\Dhairyash\College\2nd year\sem4\PRP\X-Health(Python Project)\profile_icon.png"
+profile_icon_path = r"C:\Users\Yasharth\OneDrive\Desktop\Yasharth\Python\Mini project (Xhealth)\profile_icon.png"
 profile_img = Image.open(profile_icon_path).resize((40, 40), Image.LANCZOS)
 profile_photo = ImageTk.PhotoImage(profile_img)
 
@@ -118,9 +118,59 @@ def show_home():
 def show_book_appointment():
     if "Book Appointment" not in frames:
         frame = create_page("Book Appointment")
-        label = Label(frame, text="Book Your Appointment", font=("Arial", 20, "bold"), bg="#E6F2FF", fg="#0A1F44")
-        label.place(relx=0.5, rely=0.2, anchor=CENTER)
+
+        # Main Title
+        label = Label(
+            frame,
+            text="Book Your Appointment",
+            font=("Arial", 20, "bold"),
+            bg="#E6F2FF",
+            fg="#0A1F44"
+        )
+        label.place(relx=0.5, rely=0.05, anchor=CENTER)
+
+        # Instruction Text Above Buttons
+        instruction = Label(
+            frame,
+            text="Select the type of doctor you want to book an appointment with:",
+            font=("Arial", 14),
+            bg="#E6F2FF",
+            fg="#222222"
+        )
+        instruction.place(relx=0.5, rely=0.15, anchor=CENTER)
+
+        # Doctor Categories
+        categories = [
+            "General Physician", "Cardiologist", "Dermatologist",
+            "Pediatrician", "Neurologist", "Orthopedic"
+        ]
+
+        def handle_category_selection(category):
+            print(f"You selected: {category}")
+            # Add navigation logic here
+
+        # Layout: 2 rows, 3 columns
+        for i, category in enumerate(categories):
+            btn = Button(
+                frame,
+                text=category,
+                font=("Arial", 14),
+                bg="#3ABEF9",
+                fg="white",
+                width=20,
+                height=2,
+                bd=0,
+                activebackground="#0A1F44",
+                activeforeground="white",
+                command=lambda c=category: handle_category_selection(c)
+            )
+            row = i // 3
+            col = i % 3
+            btn.place(relx=0.2 + col * 0.3, rely=0.30 + row * 0.25, anchor=CENTER)
+
     frames["Book Appointment"].tkraise()
+
+
 
 def show_medical_services():
     if "Medical Services" not in frames:
