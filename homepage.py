@@ -36,7 +36,9 @@ profile_img = Image.open(profile_icon_path).resize((40, 40), Image.LANCZOS)
 profile_photo = ImageTk.PhotoImage(profile_img)
 
 def logout_function():
-    root.destroy()
+    root.destroy()   # Destroy the homepage window
+    import X_health_loginpage  # Import the login page file
+    X_health_loginpage.open_login_window()
 
 def toggle_menu(event):
     try:
@@ -115,11 +117,22 @@ def show_home():
         update_time(time_label)
 
         health_tips = [
-            "Drink plenty of water every day!",
-            "Take a 5-minute walk every hour.",
-            "Eat fruits and vegetables daily.",
-            "Sleep at least 7-8 hours a night.",
-            "Wash your hands regularly."
+        "Drink plenty of water every day!",
+        "Take a 5-minute walk every hour.",
+        "Eat fruits and vegetables daily.",
+        "Sleep at least 7-8 hours a night.",
+        "Wash your hands regularly.",
+        "Limit your screen time and rest your eyes.",
+        "Stretch your body for 5 minutes every morning.",
+        "Practice deep breathing to reduce stress.",
+        "Cut down on sugary drinks and junk food.",
+        "Include protein in every meal.",
+        "Wear sunscreen when going outdoors.",
+        "Take short breaks while studying or working.",
+        "Keep a good posture while sitting.",        
+        "Meditate for 10 minutes a day.",
+        "Keep your surroundings clean.",
+        "Avoid smoking and drinking alcohol.",        
         ]
         random_tip = random.choice(health_tips)
 
@@ -186,11 +199,15 @@ def show_book_appointment():
     frames["Book Appointment"].tkraise()
 
 def show_medical_services():
-    if "Medical Services" not in frames:
-        frame = create_page("Medical Services")
-        label = Label(frame, text="Our Medical Services", font=("Arial", 20, "bold"), bg="#E6F2FF", fg="#0A1F44")
-        label.place(relx=0.5, rely=0.3, anchor=CENTER)
-    frames["Medical Services"].tkraise()
+        if "Health Library" not in frames:
+            frame = create_page("Medical Services")
+            
+            import medical_service
+            medical_service.load_medical_services(frame)
+
+            frames["Medical Services"] = frame 
+
+        frames["Medical Services"].tkraise()
 
 def show_health_library():
     if "Health Library" not in frames:
@@ -199,7 +216,7 @@ def show_health_library():
         import health_library
         health_library.load_health_library(frame)
 
-        frames["Health Library"] = frame
+        frames["Health Library"] = frame  # <-- important
 
     frames["Health Library"].tkraise()
 
