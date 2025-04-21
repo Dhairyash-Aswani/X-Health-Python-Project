@@ -1,7 +1,7 @@
 from tkinter import *
-from tkinter import Button  # Use tkinter.Button for buttons where you need customization
-from tkinter.ttk import Entry  # Keep using ttk for Entry, as it doesn't need customization
-from tkinter import Label  # Use tkinter.Label for labels where you need background color
+from tkinter import Button
+from tkinter.ttk import Entry
+from tkinter import Label
 from PIL import Image, ImageTk
 from tkinter import messagebox
 import mysql.connector
@@ -117,9 +117,7 @@ def login_action():
         user = mycursor.fetchone()
         if user:
             messagebox.showinfo("Logged in Successfully", f"Welcome {username}!")
-            #open_dashboard(username)
-            root.destroy() # Close login window (optional)
-            # Correct way to open homepage
+            root.destroy()  # Close login window
             import homepage
             homepage.open_dashboard(username)
         else:
@@ -138,32 +136,29 @@ root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
-# Apply gradient background (using tkinter.Frame instead of ttk.Frame)
-gradient_frame_left = Frame(root, bg="#95C8F0")  # Use tkinter.Frame
-gradient_frame_left.grid(row=0, column=0, sticky="nsew")  # Expand in all directions
+# Apply gradient background
+gradient_frame_left = Frame(root, bg="#95C8F0")
+gradient_frame_left.grid(row=0, column=0, sticky="nsew")
 
-gradient_frame_right = Frame(root, bg="#23395B")  # Use tkinter.Frame
-gradient_frame_right.grid(row=0, column=1, sticky="nsew")  # Expand in all directions
+gradient_frame_right = Frame(root, bg="#23395B")
+gradient_frame_right.grid(row=0, column=1, sticky="nsew")
 
 # Make frames expandable with the window
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 root.grid_rowconfigure(0, weight=1)
 
-# Load and display the logo on the left frame
+# Load and display the logo
 image_path = r"D:\Dhairyash\\College\2nd year\sem4\PRP\X-Health(Python Project)\X-Health Logo.jpg"
 image = Image.open(image_path)
 image = image.resize((400, 400), Image.LANCZOS)
 photo = ImageTk.PhotoImage(image)
 
-# Store reference to avoid garbage collection
 root.photo = photo
-
-# Add the logo image on the left side
 logo_label = Label(gradient_frame_left, image=photo, bg="#95C8F0")
 logo_label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-# Add a Login title on the right side
+# Login Title
 login_title = Label(gradient_frame_right, text="Login", font=("Arial", 24), bg="#23395B", fg="white")
 login_title.place(relx=0.5, rely=0.15, anchor=CENTER)
 

@@ -7,7 +7,7 @@ def load_medical_services(frame):
 
     frame.configure(bg="#E6F2FF")
 
-    label = tk.Label(frame, text="Nearby Hospitals", font=("Arial", 20, "bold"), bg="#E6F2FF", fg="#0A1F44")
+    label = tk.Label(frame, text="X-Health Hospital Branches", font=("Arial", 20, "bold"), bg="#E6F2FF", fg="#0A1F44")
     label.place(relx=0.5, rely=0.05, anchor=tk.CENTER)
 
     hospitals_data = [
